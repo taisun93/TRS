@@ -18,9 +18,11 @@ def get_weekday_count(startDay, endDay):
 
 def get_total_day(year, month, day):
 
-    leap_year_count = (year // 4) - (year // 100) + (year // 400)
+    completed_year = year-1
 
-    year_day_count = 365 * year + leap_year_count
+    leap_year_count = (completed_year // 4) - (completed_year // 100) + (completed_year // 400)
+
+    year_day_count = 365 * completed_year + leap_year_count
 
     month_list = [
         31,
