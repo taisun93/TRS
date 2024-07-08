@@ -5,15 +5,19 @@ import argparse
 def get_weekday_count(startDay, endDay):
     whole_weeks = (endDay - startDay) // 7
 
-    remainder = (endDay - startDay) % 7
+    remainder = (endDay - startDay) % 7 + 1
 
     weekday_count = 0
-    # Count backwards using the last day
+
+    # Count the weekdays in the remainder days
     for day in range(remainder):
-        if day_of_week(endDay-remainder)<5:
-            weekday_count+=1
+        print(day, ":",day_of_week(startDay + day))
+        if day_of_week(startDay + day) < 5:  
+            weekday_count += 1
 
-
+    print("Remainder: ",remainder)
+    print("whole weeks: ",whole_weeks)
+    print("Weekday count: ",weekday_count)
     return whole_weeks * 5 + weekday_count
 
 
@@ -38,10 +42,7 @@ def get_total_day(year, month, day):
         31,
     ]
 
-    month_day_count = 0
-
-    for m in range(month):
-        month_day_count += month_list[m]
+    month_day_count = sum(month_list[:month - 1])
 
     return year_day_count + month_day_count + day
 
@@ -73,7 +74,10 @@ def main():
     start_date = list(map(int, args.startDate.split("-")))
     end_date = list(map(int, args.endDate.split("-")))
 
-    print(get_weekday_count(get_total_day(*start_date), get_total_day(*end_date)))
+    print(get_total_day(*start_date))
+    print(day_of_week(get_total_day(*start_date)))
+
+    # print(get_weekday_count(get_total_day(*start_date), get_total_day(*end_date)))
 
 
 if __name__ == "__main__":
