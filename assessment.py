@@ -10,15 +10,26 @@ def get_weekday_count(startDate, endDate):
 
     return count
 
+def get_leap_year_day(year):
+    if year % 4 == 0:
+        return 1
+    return 0
+
+
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('startDate', type=lambda d: datetime.datetime.strptime(d, '%Y-%m-%d').date())
-    parser.add_argument('endDate', type=lambda d: datetime.datetime.strptime(d, '%Y-%m-%d').date())
+    #Dates are expected in YYYY-MM-DD format
+    parser.add_argument('startDate', type=str)
+    parser.add_argument('endDate', type=str)
 
     args = parser.parse_args()
 
-    print(get_weekday_count(args.startDate, args.endDate))
+    start_date = list(map(int, args.startDate.split('-')))
+    end_date = list(map(int, args.endDate.split('-')))
+    
+
+    # print(get_weekday_count(args.startDate, args.endDate))
 
 if __name__ == "__main__":
     main()
