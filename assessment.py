@@ -11,13 +11,9 @@ def get_weekday_count(startDay, endDay):
 
     # Count the weekdays in the remainder days
     for day in range(remainder):
-        print(day, ":",day_of_week(startDay + day))
         if day_of_week(startDay + day) < 5:  
             weekday_count += 1
 
-    print("Remainder: ",remainder)
-    print("whole weeks: ",whole_weeks)
-    print("Weekday count: ",weekday_count)
     return whole_weeks * 5 + weekday_count
 
 
@@ -58,8 +54,8 @@ def get_leap_year_day(year):
 
 
 def day_of_week(total_days):
-    # January 1, 1 CE was a Monday (0)
-    return (total_days - 1) % 7
+    # January 1, 1 CE was a saturday
+    return (total_days + 5) % 7
 
 
 def main():
@@ -74,10 +70,7 @@ def main():
     start_date = list(map(int, args.startDate.split("-")))
     end_date = list(map(int, args.endDate.split("-")))
 
-    print(get_total_day(*start_date))
-    print(day_of_week(get_total_day(*start_date)))
-
-    # print(get_weekday_count(get_total_day(*start_date), get_total_day(*end_date)))
+    print(get_weekday_count(get_total_day(*start_date), get_total_day(*end_date)))
 
 
 if __name__ == "__main__":
