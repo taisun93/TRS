@@ -2,12 +2,13 @@ import argparse
 
 
 def get_weekday_count(startDay, endDay):
-    whole_weeks = (endDay - startDay) // 7
+    duration = endDay - startDay + 1
 
-    remainder = (endDay - startDay) % 7 + 1
+    whole_weeks = duration // 7
+
+    remainder = duration % 7 
 
     weekday_count = 0
-
     # Count the weekdays in the remainder days
     for day in range(remainder):
         if day_of_week(startDay + day) < 5:  
@@ -56,7 +57,7 @@ def get_leap_year_day(year):
 
 def day_of_week(total_days):
     # January 1, 1 CE was a saturday
-    return (total_days + 5) % 7
+    return (total_days + 6) % 7
 
 
 def main():
